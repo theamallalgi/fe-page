@@ -1,0 +1,640 @@
+// Variables
+
+$black: #181818;
+$red: #F92672;
+$blue: #26B7F9;
+$green: #26F96B;
+$yellow: #F9A826;
+$cyan: #26F9EB;
+$purple: #B267E6;
+$white: #FFFFDF;
+$bg: $white;
+$fg: #1a1a1a;
+$ffp: 'backbones', serif;
+$ffs: 'barlow', serif;
+$gd--yg: linear-gradient(45deg, $yellow, $green);
+$gd--ry: linear-gradient(45deg, $red, $yellow);
+$gd--rg: linear-gradient(45deg, $red, $green);
+
+// Mixins
+
+@mixin shadow() {
+	-webkit-box-shadow: 0px 0px 22px -3px rgba(24,24,24,0.59);
+	-moz-box-shadow: 0px 0px 22px -3px rgba(24,24,24,0.59);
+	box-shadow: 0px 0px 22px -3px rgba(24,24,24,0.59);
+};
+
+@mixin laptop() {
+	@media (min-width: 550px) {
+		@content
+	}
+};
+
+@mixin laptop-l() {
+	@media (min-width: 860px) {
+		@content
+	}
+};
+
+// Important Styling
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+::marker {
+	font-size: 3rem;
+	color: $bg;
+}
+
+::selection {
+	background-color: $green;
+	color: $black;
+}
+
+img {
+	max-width: 100%;
+}
+
+svg {
+	color: $black;
+}
+
+body {
+	background-color: $bg;
+	color: $fg;
+	text-align: center;
+	font-family: $ffp;
+}
+
+@keyframes shape-shift {
+	0% {
+		border-radius: 50%;
+	}
+	25% {
+		border-radius: 56% 83% 46% 63%;
+	}
+	50% {
+		border-radius: 65% 38% 64% 36%;
+	}
+	75% {
+		border-radius: 83% 83% 66% 66%;
+	}
+	100% {
+		border-radius: 38% 38% 66% 66%;
+	}
+}
+
+// Content Styling
+
+.home {
+	width: 100%;
+	background-color: $green;
+	background-image: url('../../assets/images/backgrounds/home-mesh-(2).png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding-bottom: 2rem;
+	padding-top: 0.5rem;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+
+	.logo {
+		a {
+			text-decoration: none;
+			font-size: 3rem;
+			color: lighten($fg, 10%);
+		}
+	}
+	.hamburger {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		cursor: pointer;
+		z-index: 999;
+		position: relative;
+		right: 0;
+		margin-right: 2rem;
+		transition: all 0.3s ease-in-out;
+		@include laptop() {
+			// display: none;
+			position: relative;
+		}
+
+		.line {
+			height: 0.3rem;
+			width: 1.5rem;
+			background-color: $black;
+			margin: 0.1rem auto;
+			border-radius: 0.8rem;
+			transition: all 0.3s ease-in-out;
+		}
+
+		&.active .line-1 { transform: translateY(8px) rotate(45deg); }
+		&.active .line-2 { opacity: 0; }
+		&.active .line-3 { transform: translateY(-8px) rotate(-45deg); }
+	}
+
+	ul {
+		list-style-type: none;
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-end;
+		flex-direction: column;
+		display: none;
+		transition: all 500ms ease-in;
+		@include laptop() {
+			flex-direction: column;
+		}
+
+		li {
+			@include laptop() {
+				margin: 1rem;
+				max-width: 35vw;
+				margin-right: auto;
+			}
+			a {
+				text-decoration: none;
+				color: $fg;
+				display: block;
+				margin-block: 1rem;
+				font-size: 3rem;
+				border-radius: 1rem;
+				padding: 0.5rem 1rem;
+				border: 0.3rem solid $fg;
+				font-family: $ffs;
+				font-weight: 500;
+				color: $fg;
+				width: 100%;
+				@include laptop() {
+					font-size: 1rem;
+					transition: transform 200ms ease-in;
+					border: 0.3rem solid $fg;
+				}
+
+				&:hover, &:focus-visible {
+					transform: translateY(-2px);
+					background-color: #FFFFFF50;
+				}
+			}
+		}
+	}
+	.menu.active {
+		position: fixed;
+		background-color: $purple;
+		background-image: url('../../assets/images/backgrounds/home-mesh-(4).png');
+		background-position: center;
+		background-size: cover;
+		z-index: 888;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-start;
+		top: 0;
+		left: 0;
+		padding: 3rem 2rem;
+
+		li {
+			width: 100%;
+
+			a {
+				font-size: 2rem;
+			}
+		}
+	}
+}
+
+.home__content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 70vh;
+	margin-top: 2rem;
+
+	h1 {
+		font-size: 5rem;
+		font-weight: 800;
+		line-height: 1;
+		@include laptop-l() {
+			font-size: 10rem;
+		}
+	}
+	h3 {
+		margin-top: 2rem;
+		font-size: 1.2rem;
+		font-weight: 600;
+		font-family: $ffs;
+		max-width: 75vw;
+		margin-inline: auto;
+		color: lighten($fg, 7%);
+		@include laptop-l() {
+			font-size: 1.5rem;
+		}
+	}
+	h4 {
+		margin-top: 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		font-family: $ffs;
+		font-style: italic;
+		color: lighten($fg, 10%);
+		@include laptop() {
+			font-size: 1.2rem;
+		}
+		@include laptop-l() {
+			font-size: 1.5rem;
+		}
+	}
+}
+
+.banners {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 2rem;
+
+	div {
+		width: 400px;
+		height: 350px;
+		background-color: $black;
+		color: darken($bg, 10%);
+		padding: 2rem;
+		margin: 0.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		border-radius: 1rem;
+		text-align: center;
+		@include shadow();
+
+		h2 {
+			font-size: 2rem;
+			margin-bottom: 2rem;
+			color: darken($bg, 10%);
+			-webkit-text-stroke: unset;
+	  		-webkit-text-fill-color: unset;
+			@include laptop() {
+				font-size: 3rem;
+			}
+		}
+
+		p {
+			font-size: 1.2rem;
+			color: lighten($fg, 60%);
+			font-family: $ffs;
+			@include laptop() {
+				font-size: 1.5rem;
+			}
+		}
+	}
+
+	.for {
+		svg, h2 {
+			color: $blue;
+		}
+	}
+	.vision {
+		svg, h2 {
+			color: $green;
+		}
+	}
+	.usability {
+		svg, h2 {
+			color: $red;
+		}
+	}
+}
+
+.colors {
+	background-color: darken($white, 10%);
+	padding: 3rem 2rem;
+
+	.palettes {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		& div + div {
+			margin: 0.5rem;
+		}
+
+		.palette-blob {
+			height: 5rem;
+			width: 5rem;
+			background-color: $green;
+			animation: shape-shift 1s 100ms;
+			border-radius: 38% 38% 66% 66%;
+			transition: all 100ms;
+			cursor: pointer;
+			border: 0.4rem solid #000000;
+			@include laptop-l() {
+				height: 6.5rem;
+				width: 6.5rem;
+			}
+			&:hover, &:focus-visible {
+				animation: none;
+				@include shadow();
+				border-radius: 50%;
+			}
+		}
+		.blob-1 { background-color: $red; color: $red; font-size: 0px;}
+		.blob-2 { background-color: $green; color: $green; font-size: 0px;}
+		.blob-3 { background-color: $blue; color: $blue; font-size: 0px;}
+		.blob-4 { background-color: $yellow; color: $yellow; font-size: 0px;}
+		.blob-5 { background-color: $cyan; color: $cyan; font-size: 0px;}
+		.blob-6 { background-color: $purple; color: $purple; font-size: 0px;}
+		.blob-7 { background-color: $white; color: $white; font-size: 0px;}
+		.blob-8 { background-color: $black; color: $black; font-size: 0px;}
+	}
+	.colors__desc {
+		margin-top: 2rem;
+
+		h2 {
+			font-size: 3rem;
+			@include laptop-l() {
+				font-size: 4rem;
+			}
+		}
+
+		p {
+			font-size: 1.2rem;
+			max-width: 70vw;
+			margin: 1rem auto;
+			font-family: $ffs;
+			@include laptop() {
+				font-size: 1.5rem;
+			}
+			@include laptop-l() {
+				font-size: 2rem;
+			}
+		}
+	}
+}
+
+// gallery
+.gallery {
+	padding: 3rem 2rem;
+	background-color: $purple;
+
+	.preview {
+		height: 300px;
+		width: 80vw;
+		border-radius: 1rem;
+		margin: auto;
+		background-image: url('../../assets/images/windows/alacritty.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		@include shadow();
+		@include laptop-l() {
+			height: 600px;
+			width: 90vw;
+		}
+	}
+	.bar {
+		margin-top: 1rem;
+
+		ul {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			list-style-type: none;
+			background-color: $white;
+			border-radius: 2rem;
+			width: 50vw;
+			margin-inline: auto;
+			padding-block: 0.5rem;
+			@include shadow();
+
+			li {
+				font-family: $ffs;
+				margin: 0.5rem;
+				text-decoration: none;
+				background-color: $purple;
+				border: 0.2rem solid $purple;
+				border-radius: 2rem;
+				padding: 0.5rem 1rem;
+				white-space: nowrap;
+				font-size: 1rem;
+				display: block;
+				color: $black;
+				cursor: pointer;
+				@include shadow();
+				@include laptop() {
+					font-size: 1.2rem;
+				}
+				@include laptop-l() {
+					font-size: 1.5rem;
+				}
+				&:hover, &:focus-visible {
+					background-color: lighten($purple, 5%);
+				}
+			}
+			.bar--active {
+				border: 0.2rem solid $black;
+			}
+		}
+	}
+}
+
+// Apps
+
+.apps {
+	padding: 3rem;
+	background-color: $green;
+	text-align: center;
+
+	h2 {
+		margin-bottom: 4rem;
+		font-size: 3rem;
+		@include laptop-l() {
+			font-size: 4rem;
+		}
+	}
+
+	.line {
+		width: 70%;
+		margin-inline: auto;
+		border-radius: 1rem;
+		height: 0.2rem;
+		background-color: $black;
+		@include laptop-l() {
+			width: 60%;
+		}
+	}
+	.app__link {
+		a {
+			width: 50%;
+			margin-inline: auto;
+			text-decoration: none;
+			font-size: 3rem;
+			color: lighten($black, 10%);
+			margin-block: 1rem;
+			display: block;
+			font-style: italic;
+			@include laptop() {
+				font-size: 3.5rem;
+			}
+			@include laptop-l() {
+				font-size: 5rem;
+			}
+			&:hover, &:focus-visible {
+				color: lighten($black, 5%);
+				font-style: normal;
+			}
+		}
+	}
+}
+
+// contribute
+
+.contribute {
+	padding: 3rem;
+	background-color: $yellow;
+
+	h2 {
+		font-size: 3rem;
+		margin-bottom: 2.5rem;
+		@include laptop-l() {
+			font-size: 4rem;
+		}
+	}
+
+	p {
+		font-size: 1.2rem;
+		font-family: $ffs;
+		margin-bottom: 2rem;
+		max-width: 80vw;
+		margin: auto;
+		margin-bottom: 2rem;
+		@include laptop() {
+			font-size: 1.5rem;
+		};
+		@include laptop-l() {
+			font-size: 2rem;
+		}
+	}
+
+	a {
+		font-size: 1.3rem;
+		text-decoration: none;
+		color: $yellow;
+		font-family: $ffs;
+		background-color: $black;
+		border-radius: 2rem;
+		padding: 1rem 2rem;
+		margin: auto;
+		@include shadow();
+		@include laptop() {
+			font-size: 1.8rem;
+		}
+		@include laptop-l() {
+			font-size: 2rem;
+		}
+
+		&:hover, &:focus-visible {
+			background-color: lighten($black, 5%);
+		}
+	}
+}
+
+// About
+.about {
+	padding: 3rem;
+	background-color: $blue;
+	background-image: url(../../assets/images/backgrounds/purple-mesh.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	h2 {
+		font-size: 3rem;
+		margin-bottom: 2rem;
+		@include laptop-l() {
+			font-size: 4rem;
+		}
+	}
+
+	p {
+		font-size: 1.2rem;
+		font-family: $ffs;
+		max-width: 80vw;
+		margin-inline: auto;
+		@include laptop() {
+			font-size: 1.5rem;
+		};
+		@include laptop-l() {
+			font-size: 2rem;
+		}
+	}
+}
+
+// Footer
+footer {
+	padding: 3rem;
+	background-color: $black;
+
+	h3 {
+		font-size: 1.5rem;
+		color: $bg;
+		@include laptop-l() {
+			font-size: 2rem;
+		}
+
+		a {
+			text-decoration: underline;
+			color: $yellow;
+		}
+	}
+
+	ul {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		margin-top: 1.5rem;
+
+		li {
+			margin: 1.2rem;
+
+			a {
+				text-decoration: none;
+				font-size: 1rem;
+				border: 0.1rem solid $yellow;
+				border-radius: 50%;
+				padding: 0.7rem;
+				@include laptop() {
+					font-size: 1.5rem;
+				}
+
+				svg {
+					color: $yellow;
+				}
+
+				&:hover, &:focus-visible {
+					background-color: #FFFFFF10;
+				}
+			}
+		}
+	}
+}
