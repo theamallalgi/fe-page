@@ -1,5 +1,14 @@
-// Variables
+// Imports
+@font-face {
+    font-family: 'barlow';
+    src: local('barlow'), url('../../assets/fonts/barlow.ttf');
+}
+@font-face {
+    font-family: 'backbones';
+    src: local('backbones'), url('../../assets/fonts/backbones.ttf');
+}
 
+// Variables
 $black: #181818;
 $red: #F92672;
 $blue: #26B7F9;
@@ -17,7 +26,6 @@ $gd--ry: linear-gradient(45deg, $red, $yellow);
 $gd--rg: linear-gradient(45deg, $red, $green);
 
 // Mixins
-
 @mixin shadow() {
 	-webkit-box-shadow: 0px 0px 22px -3px rgba(24,24,24,0.59);
 	-moz-box-shadow: 0px 0px 22px -3px rgba(24,24,24,0.59);
@@ -37,7 +45,6 @@ $gd--rg: linear-gradient(45deg, $red, $green);
 };
 
 // Important Styling
-
 * {
 	margin: 0;
 	padding: 0;
@@ -93,7 +100,6 @@ body {
 }
 
 // Content Styling
-
 .home {
 	width: 100%;
 	background-color: $green;
